@@ -1,0 +1,10 @@
+venv
+__pycache__
+.git
+.idea
+.dockerignore
+.gitignore
+README.md
+Dockerfile
+.env.template
+vasa_registration.json.template
