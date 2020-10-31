@@ -77,9 +77,12 @@ class VasaApi:
                 return _class["Id"]
         raise AssertionError(f"did not find any {class_type} classes starting at: {class_time}")
 
-    def register(self, class_id: int):
+    def register(self, class_id: int) -> dict:
         """Register for vasa class by ID"""
         register_url = "https://www.gympayment.com/service.asmx/RegisterForClass"
         payload = {"ID": class_id}
         response = self._session.post(url=register_url, json=payload)
-        assert response.json()["d"]["Success"] is True, f"Error signing up for class ({class_id})"
+        response_json = response.json()["d"]
+        if response_json["Success"] is False:
+            raise ValueError(f"Error signing up for class ({class_id})")
+        return response_json

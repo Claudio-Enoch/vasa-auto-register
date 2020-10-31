@@ -1,1 +1,1 @@
-* * * * * /usr/local/bin/python /usr/src/app/main.py >> /var/log/cron.log 2>&1
+0,29,30,59 * * * * /usr/local/bin/python /usr/src/app/main.py >> /var/log/cron.log 2>&1

@@ -17,4 +17,6 @@ if __name__ == '__main__':
 
     class_id = vasa.search(club_id=CLUB_ID, class_type=class_type, class_time=hour)
 
-    vasa.register(class_id=class_id)
+    r = vasa.register(class_id=class_id)
+
+    print(f'Registered for {r["scheduledClass"]["ClassName"]}, {r["scheduledClass"]["Availability"]} slots available')
