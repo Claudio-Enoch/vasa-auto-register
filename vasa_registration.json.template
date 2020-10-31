@@ -1,0 +1,22 @@
+{
+  "Monday": {
+    "GYM TIME": ["9:00AM","10:00AM"]
+  },
+  "Tuesday": {
+    "GYM TIME": ["9:00AM","10:00AM"],
+    "YOGA": ["4:30PM"]
+  },
+  "Wednesday": {
+    "GYM TIME": ["9:00AM","10:00AM"]
+  },
+  "Thursday": {
+    "GYM TIME": ["9:00AM","10:00AM"]
+  },
+  "Friday": {
+    "GYM TIME": ["9:00AM","10:00AM"]
+  },
+  "Saturday": {
+    "GYM TIME": ["9:00AM"]
+  },
+  "Sunday": {}
+}

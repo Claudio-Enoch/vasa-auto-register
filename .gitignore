@@ -28,3 +28,6 @@ venv/
 
 # IDE configs
 .idea/
+
+# User configs
+vasa_registration.json
