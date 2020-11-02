@@ -12,6 +12,10 @@ with open(os.path.join(dir_path, "..", "vasa_registration.json")) as file:
     vasa_registration_json = json.load(file)
 
 
+def utc_time():
+    return datetime.utcnow() - timedelta(hours=7)
+
+
 def check_time_to_register() -> Tuple[str, str]:
     """
     Check if it's time to register for desired class in vasa_registration.json.
@@ -19,17 +23,17 @@ def check_time_to_register() -> Tuple[str, str]:
     """
 
     # get day of week
-    two_day_offset = (datetime.today() + timedelta(days=2)).weekday()  # TODO: use UTC to get MT day of week
+    two_day_offset = (utc_time() + timedelta(days=2)).weekday()
     offset_day = calendar.day_name[two_day_offset]  # Wednesday
     # get mt time
-    datetime_utc = (datetime.utcnow() - timedelta(hours=6, minutes=-2))
-    time_now = datetime_utc.strftime("%I").lstrip("0") + datetime_utc.strftime(":%M%p")  # 8:55AM
+    utc_offset = (utc_time() + timedelta(minutes=2))
+    offset_time = utc_offset.strftime("%I").lstrip("0") + utc_offset.strftime(":%M%p")  # 8:55AM
 
     for class_type, class_times in vasa_registration_json[offset_day].items():
-        if time_now in class_times:
-            print(f"{datetime_utc} - Registering for {class_type} at {time_now} on {offset_day}")
-            return class_type, time_now  # ( "CARDIO", "9:30AM" )
-    print(f"{datetime_utc} - ... skipped {time_now} on {offset_day}")
+        if offset_time in class_times:
+            print(f"{utc_time()} - Registering for {class_type} at {offset_time} on {offset_day}")
+            return class_type, offset_time  # ( "CARDIO", "9:30AM" )
+    print(f"{utc_time()} - ... skipped {offset_time} on {offset_day}")
     exit(0)
 
 
@@ -41,7 +45,7 @@ def retry(seconds: int, attempts: int):
             nonlocal attempts
             while attempts > 0:
                 attempts -= 1
-                print(f"*** attempt # {attempts}")
+                print(f"{utc_time()} *** attempt # {attempts}")
                 time.sleep(seconds)
                 try:
                     return func(*args, **kwargs)

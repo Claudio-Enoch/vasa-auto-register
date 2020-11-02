@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 from requests import Session
 
-from app.helper import retry
+from app.helper import retry, utc_time
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -56,19 +56,19 @@ class VasaApi:
         self._memb_num = response.json()["d"][0]["membNum"]
         assert self._memb_num, "error finding member number"
 
-    @retry(seconds=5, attempts=120)
+    @retry(seconds=3, attempts=200)
     def search(self, club_id: str, class_type: str, class_time: str) -> int:
         """Return a list of all classes found and their respective metadata"""
         with open(os.path.join(dir_path, "..", "vasa_class_map.json")) as file:
             class_map = json.load(file)
         class_type_id = class_map[class_type]
         search_url = "https://www.gympayment.com/service.asmx/LoadClasses"
-        class_date = datetime.today() + timedelta(days=2)
+        class_date = utc_time() + timedelta(days=2)
         payload = {"classType": class_type_id,
                    "clubAt": club_id,
                    "clubID": club_id,
                    "start": f"{class_date.isoformat()[:10]}T00:00:00.000",
-                   "end": f"{class_date.isoformat()[:10]}T00:00:00.000",
+                   "end": f"{class_date.isoformat()[:10]}T23:00:00.000",
                    "membNum": self._memb_num, }
         response_json = self._session.post(url=search_url, json=payload).json()
         assert (classes := response_json["d"]), f"did not find any classes for: {class_type} on {class_date}"
