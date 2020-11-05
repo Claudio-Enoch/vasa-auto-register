@@ -56,7 +56,7 @@ class VasaApi:
         self._memb_num = response.json()["d"][0]["membNum"]
         assert self._memb_num, "error finding member number"
 
-    @retry(seconds=3, attempts=200)
+    @retry(seconds=2, attempts=300)
     def search(self, club_id: str, class_type: str, class_time: str) -> int:
         """Return a list of all classes found and their respective metadata"""
         with open(os.path.join(dir_path, "..", "vasa_class_map.json")) as file:
