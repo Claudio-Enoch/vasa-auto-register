@@ -14,9 +14,9 @@ Automate the registration of Vasa classes.
 - copy and update `.env.template` file, removing `.template` from file name
     - `.env` contains personal login information and the gym location id
 - copy and update `vasa_registration.json.template` file, removing `.template` from file name
-  `vasa_registration.json` is the config file used to register for classes
-- run with docker `docker build -t <image_name> .`
-- run with docker `docker run -d --restart unless-stopped <image_name>`
+    - `vasa_registration.json` is the config file used to register for classes
+- build docker image `docker build -t <image_name> .`
+- run container `docker run -d --restart unless-stopped <image_name>`
 
 ### Notes
 
