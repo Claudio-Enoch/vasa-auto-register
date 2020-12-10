@@ -33,7 +33,7 @@ def check_time_to_register() -> Tuple[str, str]:
         if offset_time in class_times:
             print(f"{utc_time()} - Registering for {class_type} at {offset_time} on {offset_day}")
             return class_type, offset_time  # ( "CARDIO", "9:30AM" )
-    print(f"{utc_time()} - ... Skip {offset_time} at {offset_time} on {offset_day}")
+    print(f"{utc_time()} - ... skipping {offset_time} on {offset_day}")
     exit(0)
 
 
