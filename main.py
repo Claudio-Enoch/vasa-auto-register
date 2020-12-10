@@ -19,4 +19,4 @@ if __name__ == '__main__':
 
     r = vasa.register(class_id=class_id)
 
-    print(f'Registered for {r["scheduledClass"]["ClassName"]}, {r["scheduledClass"]["Availability"]} slots available')
+    print(f'Registered for {r["scheduledClass"]["ClassName"]}, {r["scheduledClass"]["Availability"]} slots remaining')
